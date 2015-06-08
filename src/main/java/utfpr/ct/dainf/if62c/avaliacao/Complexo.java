@@ -53,36 +53,43 @@ public class Complexo {
     
     // implementar div(Complexo)
     public Complexo div(Complexo c){
-        return new Complexo(((c.real*real + c.img*img) / (real*real + img*img)), // parte real
-                            (real*c.img - c.real*img) / (real*real + img*img) ); // parte imaginaria
+        return new Complexo( ((real*c.real + img*c.img) / ( c.real*c.real + c.img*c.img)), // parte real
+                            ( (c.real*img - real*c.img) / (c.real*c.real + c.img*c.img) ) ); // parte imaginaria
     }
     
     // implementar sqrt()
-    public Complexo[] sqrt(Complexo c) {
+    public Complexo[] sqrt() {
         // completar implementação
         Complexo[] raizes = new Complexo[2];
         
-        double r = Math.sqrt((c.real*c.real) + (c.img*c.img));
+        double r = Math.sqrt((real*real) + (img*img));
+        System.out.println("r = " + r);
         double rho = Math.sqrt(r);
+        System.out.println("rho = " + rho);
         double psi1;
         double psi2;
-        double gama=0;
-        if(c.real > 0){
-            gama = Math.atan(c.img / c.real);
-        }else if(c.real < 0){
-            gama = Math.atan((c.img / c.real) + Math.PI);
-        }else if((c.real == 0) && (c.img == 0)){
+        double gama = 0;
+        if(real > 0){
+            gama = Math.atan(img / real);
+        }else if(real < 0){
+            gama = (Math.atan(img / real) + Math.PI);
+        }else if((real == 0) && (img == 0)){
             gama = 0;
-        }else if((c.real == 0) && (c.img > 0)){
+        }else if((real == 0) && (img > 0)){
             gama = Math.PI / 2;
-        }else if((c.real == 0) && (c.img < 0)){
+        }else if((real == 0) && (img < 0)){
             gama = (3 * Math.PI) / 2;
         }
+        //System.out.println("gama = " + gama);
         psi1 = gama / 2;
+        //System.out.println("psi1 = " + psi1);
         psi2 = (gama / 2) + Math.PI;
+        //System.out.println("psi2 = " + psi2);
         
-        raizes[0] = new Complexo(rho*(Math.acos(psi1)), rho*(Math.asin(psi1)));
-        raizes[1] = new Complexo(rho*(Math.acos(psi2)), rho*(Math.asin(psi2)));
+        raizes[0] = new Complexo(rho*(Math.cos(psi1)), rho*(Math.sin(psi1)));
+        //System.out.println("raizes[0] = " + raizes[0]);
+        raizes[1] = new Complexo(rho*(Math.cos(psi2)), rho*(Math.sin(psi2)));
+        //System.out.println("raizes[1] = " + raizes[1]);
         
         // retornar o vetor contendo as raízes
         return raizes;
